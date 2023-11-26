@@ -1,0 +1,34 @@
+[
+  {
+    "title": "POP show in Tel Aviv",
+    "description": "An article demo for show in tel aviv",
+    "tags": ["pop", "rock", "cool shows"],
+    "showDate": "2023-11-26T14:13:53.933Z",
+    "ticketPrice": 25,
+    "place": "Nokia palace tel aviv"
+  },
+  {
+    "title": "Shanti banti drums",
+    "description": "Text foo bla bla shanti banti drums",
+    "tags": ["shanti", "drums"],
+    "showDate": "2023-11-26T14:13:53.933Z",
+    "ticketPrice": 10,
+    "place": "Galil area"
+  },
+  {
+    "title": "Infected mushroom return to the sauce",
+    "description": "Infected mushroom best show ever",
+    "tags": ["psy", "electric", "pop"],
+    "showDate": "2023-11-26T14:13:53.933Z",
+    "ticketPrice": 63,
+    "place": "Haoman 17 jerusalem"
+  },
+  {
+    "title": "Rock with metallica",
+    "description": "Best rock show in tel aviv",
+    "tags": ["rock", "pop", "metal", "havy metal"],
+    "showDate": "2023-11-26T14:13:53.933Z",
+    "ticketPrice": 52,
+    "place": "Yarkon tel aviv"
+  }
+]
