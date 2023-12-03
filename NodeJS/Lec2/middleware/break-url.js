@@ -2,12 +2,12 @@
 const url = require('node:url');
 
 const breakUrl = (req, res) => {
-    //req.url = /movies?title=batman
-    const result = url.parse(req.url, true)
+    //movies?title=batman
+    const { pathname, query } = url.parse(req.url, true);
 
+    req.url = pathname; //req.url = 'movies'
+    req.query = query;  //req.query = {title: 'batman'}
 
-    console.dir(result.query);
-    console.dir(result.pathname);
 }
 
 module.exports = breakUrl;
