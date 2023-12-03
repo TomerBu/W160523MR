@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "qrcode": "^1.5.3",
+    "underscore": "^1.13.6",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
