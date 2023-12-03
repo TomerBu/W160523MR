@@ -1,2 +1,7 @@
 *.key
 **/*.key
+
+**/node_modules/
+
+
+# git remove NodeJS/Lec2/node_modules
