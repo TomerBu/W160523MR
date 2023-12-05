@@ -1,0 +1,21 @@
+{
+  "type": "module",
+  "name": "lec3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "express": "^4.18.2"
+  }
+}
