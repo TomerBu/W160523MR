@@ -1,7 +1,7 @@
 import express, { json } from 'express';
-import { usersRouter } from './routes/users.js';
-import { logger } from './middleware/logger.js';
-import { notFound } from './middleware/not-found.js';
+import { usersRouter } from './routes/users';
+import { logger } from './middleware/logger';
+import { notFound } from './middleware/not-found';
 
 const app = express();
 
