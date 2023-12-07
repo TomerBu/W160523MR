@@ -27,15 +27,33 @@ router.post("/", (req, res) => {
     if (err) {
       return res.status(500).json(err);
     }
-    res.json(result);
+    res.status(201).json(result);
   });
 });
 
-// STATUSES!
-// REST
-// requests with dynamic params:  cards/:id  
+// TODO: REST
+// requests with dynamic params:  cards/:id
 // requests with query params:  people?search=bob
 // delete
 // put
 
+//pure function - no side effects:
+function printPerson(person: { firstName: string }) {
+  console.log(`Person: name: ${person.firstName}😀`);
+}
+
+const bob = { firstName: "Bob" };
+printPerson(bob);
+
+function printPersonYack(person: { firstName: string }) {
+  person.firstName = `Person: name: ${person.firstName}😀`;
+  console.log(person.firstName);
+}
+
+const bobi = { firstName: "Bobi" };
+printPersonYack(bobi);
+printPersonYack(bobi);
+
 export { router as peopleRouter };
+
+
