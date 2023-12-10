@@ -1,15 +1,13 @@
 import configDotEnv from "./config";
-configDotEnv();
-
-console.log(process.env.NODE_ENV);
-console.log(process.env.DB_CONNECTION_STRING);
-
-
 import express, { json } from "express";
 import { logger } from "./middleware/logger";
 import { notFound } from "./middleware/not-found";
 import { peopleRouter } from "./routes/people";
 import { usersRouter } from "./routes/users";
+import { connect } from "./database/connection";
+
+configDotEnv();
+connect();
 
 const app = express();
 
