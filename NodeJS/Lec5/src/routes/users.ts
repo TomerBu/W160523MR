@@ -13,9 +13,12 @@ router.get("/", async (req, res) => {
   }
 });
 router.post("/", async (req, res) => {
-  //TODO: use joi to check the body
+
   try {
     const userBody = req.body;
+
+    //TODO: use joi to check the body
+    //if(המידע לא תקין){return res.json({message: "bad request"})}
 
     const user = new User(userBody);
 
