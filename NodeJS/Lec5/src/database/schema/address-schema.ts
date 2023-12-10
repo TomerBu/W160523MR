@@ -13,7 +13,7 @@ const addressSchema = new Schema<IAddress>({
     type: String,
     required: false,
     default: "",
-    minlength: 2,
+    minlength: 0,
     maxlength: 50,
   },
 

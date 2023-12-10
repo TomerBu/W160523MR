@@ -10,10 +10,10 @@ const nameSchema = new Schema<IName>({
     maxlength: 20,
   },
   middle: {
+    type: String,
     required: false,
     default: "",
-    type: String,
-    minlength: 2,
+    minlength: 0,
     maxlength: 20,
   },
   last: {
