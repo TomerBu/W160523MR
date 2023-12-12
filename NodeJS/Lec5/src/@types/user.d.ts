@@ -3,7 +3,7 @@ type IName = {
   middle?: string;
   last: string;
 };
-
+ 
 type IAddress = {
   street: string;
   city: string;

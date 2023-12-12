@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { User } from "../database/model/user";
+import { IUser } from "../@types/user";
 
 const router = Router();
 
@@ -15,11 +16,8 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
 
   try {
-    const userBody = req.body;
-
-    //TODO: use joi to check the body
-    //if(המידע לא תקין){return res.json({message: "bad request"})}
-
+    const userBody = req.body as IUser;
+ 
     const user = new User(userBody);
 
     //mongo -> save
