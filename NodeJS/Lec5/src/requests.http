@@ -8,7 +8,7 @@ Content-Type: application/json
 {
   "name": {
     "first": "Bruce",
-    "last": "Wayne"
+    "last": "Willis"
   },
   "address": {
     "street": "123 Main St",
@@ -22,7 +22,17 @@ Content-Type: application/json
     "url": "https://picsum.photos/200/300"
   },
   "phone": "050-8123091",
-  "email": "Wayne1@batcave.com",
+  "email": "Willis@batcave.com",
   "isBusiness": true,
-  "password": "123456aA!",
+  "password": "123456aA!"
+}
+
+
+### Login:
+POST http://localhost:8080/api/v1/users/login
+Content-Type: application/json
+
+{
+  "email": "Willis@batcave.com",
+  "password": "123456aA!"
 }

@@ -3,7 +3,7 @@ type IName = {
   middle?: string;
   last: string;
 };
- 
+
 type IAddress = {
   street: string;
   city: string;
@@ -30,4 +30,13 @@ type IUser = {
   createdAt?: Date;
 };
 
-export { IUser, IName, IAddress, IImage };
+type ILogin = {
+  email: string;
+  password: string;
+};
+
+type IJWTPayload = {
+  email: string;
+};
+
+export { IUser, IName, IAddress, IImage, ILogin, IJWTPayload };
