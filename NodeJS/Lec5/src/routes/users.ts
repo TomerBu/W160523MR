@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { User } from "../database/model/user";
-import { IUser } from "../@types/user";
+import { validateRegistration } from "../middleware/validation";
 
 const router = Router();
 
@@ -13,14 +13,11 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "server error", e });
   }
 });
-router.post("/", async (req, res) => {
-
+router.post("/", validateRegistration, async (req, res) => {
   try {
-    const userBody = req.body as IUser;
- 
-    const user = new User(userBody);
+    const userBody = req.body;
 
-    //mongo -> save
+    const user = new User(userBody);
     const saved = await user.save();
 
     res.status(201).json({ message: "Saved", user: saved });
