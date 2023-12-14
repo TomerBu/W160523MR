@@ -4,7 +4,8 @@ import { validateLogin, validateRegistration } from "../middleware/validation";
 import JWT from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { ILogin, IUser } from "../@types/user";
-import { createUser } from "../service/user-service";
+import { createUser, validateUser } from "../service/user-service";
+import { auth } from "../service/auth-service";
 
 const router = Router();
 
@@ -17,41 +18,32 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "server error", e });
   }
 });
+
 router.post("/", validateRegistration, async (req, res, next) => {
   try {
     const saved = await createUser(req.body as IUser);
     res.status(201).json({ message: "Saved", user: saved });
   } catch (err) {
-      next(err);
+    next(err);
   }
 });
 
-router.post("/login", validateLogin, async (req, res) => {
-  //check the pass
-  const { email, password } = req.body as ILogin;
+router.post("/login", validateLogin, async (req, res, next) => {
+  try {
+    //check the request:
+    const { email, password } = req.body as ILogin;
 
-  const user = await User.findOne({ email });
+    //call the service:
+    const jwt = await validateUser(email, password);
 
-  if (!user) {
-    return res.status(400).json({
-      message: "Login failed Check your username and password and try again",
-    });
+    //response
+    res.json(jwt);
+  } catch (e) {
+    next(e);
   }
-
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-
-  if (!isPasswordValid) {
-    return res.status(400).json({
-      message: "Login failed Check your username and password and try again",
-    });
-  }
-
-  const secret = process.env.JWT_SECRET!;
-
-  const jwt = JWT.sign({ email: user.email }, secret);
-
-  res.json({ jwt });
 });
+
+
 
 export { router as usersRouter };
 
