@@ -12,7 +12,7 @@ const authService = {
 
   generateJWT: (payload: IJWTPayload) => {
     const secret = process.env.JWT_SECRET!;
-    return jwt.sign(payload, secret);
+    return jwt.sign({payload}, secret);
   },
 
   verifyJWT: (token: string) => {

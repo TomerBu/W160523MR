@@ -12,6 +12,9 @@ connect();
 
 const app = express();
 
+
+//localhost:8080/foo.html
+app.use(express.static("public"));
 // middleware chain:
 app.use(json());
 app.use(logger);

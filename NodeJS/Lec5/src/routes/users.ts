@@ -1,11 +1,8 @@
 import { Router } from "express";
+import { ILogin, IUser } from "../@types/user";
 import { User } from "../database/model/user";
 import { validateLogin, validateRegistration } from "../middleware/validation";
-import JWT from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import { ILogin, IUser } from "../@types/user";
 import { createUser, validateUser } from "../service/user-service";
-import { auth } from "../service/auth-service";
 
 const router = Router();
 
@@ -19,6 +16,8 @@ router.get("/", async (req, res) => {
   }
 });
 
+//email, password + userdetails
+//password -> hsah
 router.post("/", validateRegistration, async (req, res, next) => {
   try {
     const saved = await createUser(req.body as IUser);
@@ -28,6 +27,8 @@ router.post("/", validateRegistration, async (req, res, next) => {
   }
 });
 
+//email, password
+//JWT
 router.post("/login", validateLogin, async (req, res, next) => {
   try {
     //check the request:
