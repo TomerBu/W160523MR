@@ -3,7 +3,8 @@ import { User } from "../database/model/user";
 import { validateLogin, validateRegistration } from "../middleware/validation";
 import JWT from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { ILogin } from "../@types/user";
+import { ILogin, IUser } from "../@types/user";
+import { createUser } from "../service/user-service";
 
 const router = Router();
 
@@ -16,20 +17,12 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "server error", e });
   }
 });
-router.post("/", validateRegistration, async (req, res) => {
+router.post("/", validateRegistration, async (req, res, next) => {
   try {
-    const userBody = req.body;
-
-    const user = new User(userBody);
-
-    //a 12 salt hash
-    user.password = await bcrypt.hash(user.password, 12);
-
-    const saved = await user.save();
-
+    const saved = await createUser(req.body as IUser);
     res.status(201).json({ message: "Saved", user: saved });
-  } catch (e) {
-    res.status(400).json({ message: "An Error occured", e });
+  } catch (err) {
+      next(err);
   }
 });
 
