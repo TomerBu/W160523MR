@@ -1,6 +1,6 @@
   ### GET All users:
 GET http://localhost:8080/api/v1/users
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldpbGxpc0BiYXRjYXZlLmNvbSIsImlhdCI6MTcwMjU0NzM4N30.hD91HgG16KwP3T-sVj0DrcasaG7hHiDdkCR0s9WuHn4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTcwMjgwMDg3Nn0.1UBbvM-gXol-pr21_FTWYARyVBYzwfMD9QLs8V8tA4o
 
 
 ### Add a user:
@@ -9,8 +9,8 @@ Content-Type: application/json
 
 {
   "name": {
-    "first": "Bruce",
-    "last": "Willis"
+    "first": "root",
+    "last": "admin"
   },
   "address": {
     "street": "123 Main St",
@@ -24,9 +24,9 @@ Content-Type: application/json
     "url": "https://picsum.photos/200/300"
   },
   "phone": "050-8123091",
-  "email": "Willis@batcave.com",
+  "email": "admin@gmail.com",
   "isBusiness": true,
-  "password": "123456aA!"
+  "password": "123456aA!", 
 }
 
 
@@ -35,6 +35,21 @@ POST http://localhost:8080/api/v1/users/login
 Content-Type: application/json
 
 {
-  "email": "Willis@batcave.com",
+  "email": "admin@gmail.com",
   "password": "123456aA!"
 }
+
+
+### get Wayne by id with JWT of Willis:
+GET http://localhost:8080/api/v1/users/65784e0a927be706a0d28789
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldpbGxpc0BiYXRjYXZlLmNvbSIsImlhdCI6MTcwMjgwMDcwNn0.pZDlu6NmQdZhGH1ZDKK5dJAaRY-5S5Dvh3HY6Z4G1Eg
+
+
+### GET Willis by id with jwt of Willis
+GET http://localhost:8080/api/v1/users/65784e4a927be706a0d2878f
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldpbGxpc0BiYXRjYXZlLmNvbSIsImlhdCI6MTcwMjgwMDcwNn0.pZDlu6NmQdZhGH1ZDKK5dJAaRY-5S5Dvh3HY6Z4G1Eg
+
+
+### GET Wayne with JWT of admin:
+GET http://localhost:8080/api/v1/users/65784e0a927be706a0d28789
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTcwMjgwMDg3Nn0.1UBbvM-gXol-pr21_FTWYARyVBYzwfMD9QLs8V8tA4o

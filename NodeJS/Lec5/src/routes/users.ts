@@ -3,16 +3,42 @@ import { ILogin, IUser } from "../@types/user";
 import { User } from "../database/model/user";
 import { validateLogin, validateRegistration } from "../middleware/validation";
 import { createUser, validateUser } from "../service/user-service";
+import { isAdmin } from "../middleware/is-admin";
+import { isAdminOrUser } from "../middleware/is-admin-or-user";
+import { isUser } from "../middleware/is-user";
+import { auth } from "../service/auth-service";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", isAdmin, async (req, res, next) => {
   try {
     const allUsers = await User.find();
 
     res.json(allUsers);
   } catch (e) {
-    res.status(500).json({ message: "server error", e });
+    next(e);
+  }
+});
+
+
+router.put("/:id", isUser, validateRegistration, async (req, res, next) => {
+  //prevent isAdmin from being passed
+  //let the middleware pass the entire user
+  //hash the password
+  
+})
+
+
+router.get("/:id", isAdminOrUser, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findOne({"_id": id});
+
+    const { password, ...rest } = user!._doc;
+    return res.json({ user: rest });
+  } catch (e) {
+    next(e);
   }
 });
 
@@ -43,8 +69,6 @@ router.post("/login", validateLogin, async (req, res, next) => {
     next(e);
   }
 });
-
-
 
 export { router as usersRouter };
 

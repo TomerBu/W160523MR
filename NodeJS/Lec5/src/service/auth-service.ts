@@ -12,13 +12,15 @@ const authService = {
 
   generateJWT: (payload: IJWTPayload) => {
     const secret = process.env.JWT_SECRET!;
-    return jwt.sign({payload}, secret);
+    return jwt.sign(payload, secret);
   },
 
   verifyJWT: (token: string) => {
     const secret = process.env.JWT_SECRET!;
+
     const payload = jwt.verify(token, secret);
-    return payload as IJWTPayload & { iat: number };
+
+    return payload as IJWTPayload & {iat: number};
   },
 };
 
