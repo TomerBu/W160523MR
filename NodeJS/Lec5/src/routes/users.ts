@@ -20,22 +20,34 @@ router.get("/", isAdmin, async (req, res, next) => {
   }
 });
 
-
 router.put("/:id", isUser, validateRegistration, async (req, res, next) => {
-  //prevent isAdmin from being passed
-  //let the middleware pass the entire user
-  //hash the password
-  
-})
+  //hash the password:
+  req.body.password = await auth.hashPassword(req.body.password);
+
+  const savedUser = await User.findByIdAndUpdate({ _id: req.params.id }, req.body, {new: true});
+  //not null check
+  //remove the password
+  res.json(savedUser);
+});
+
+
+
+
+
+
+
+
+
+
 
 
 router.get("/:id", isAdminOrUser, async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const user = await User.findOne({"_id": id});
+    const user = (await User.findById(id).lean()) as IUser;
 
-    const { password, ...rest } = user!._doc;
+    const { password, ...rest } = user;
     return res.json({ user: rest });
   } catch (e) {
     next(e);

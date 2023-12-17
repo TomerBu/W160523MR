@@ -1,3 +1,5 @@
+import { ObjectId } from "mongoose";
+
 type IName = {
   first: string;
   middle?: string;
@@ -28,6 +30,7 @@ type IUser = {
   isBusiness: boolean;
   isAdmin?: boolean;
   createdAt?: Date;
+  _id?: string;
 };
 
 type ILogin = {

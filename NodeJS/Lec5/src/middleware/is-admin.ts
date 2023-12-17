@@ -20,6 +20,7 @@ const isAdmin: RequestHandler = async (req, res, next) => {
   const token = extractToken(req); //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldpbGxpc0BiYXRjYXZlLmNvbSIsImlhdCI6MTcwMjU0NzM4N30.hD91HgG16KwP3T-sVj0DrcasaG7hHiDdkCR0s9WuHn4
   const { email } = auth.verifyJWT(token);
 
+  //get user from database
   const user = await User.findOne({ email });
 
   const isAdmin = user?.isAdmin;

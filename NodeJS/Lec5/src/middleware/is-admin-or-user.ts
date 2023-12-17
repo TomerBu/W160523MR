@@ -10,7 +10,7 @@ const isAdminOrUser: RequestHandler = async (req, res, next) => {
     const token = extractToken(req);
     const { email } = auth.verifyJWT(token);
 
-    
+    //get user from database:
     const user = await User.findOne({ email });
 
     if (!user) throw new BizCardsError("User does not exist", 401);
