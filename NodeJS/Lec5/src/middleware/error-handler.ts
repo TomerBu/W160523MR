@@ -1,7 +1,9 @@
-import e, { ErrorRequestHandler } from "express";
+import { ErrorRequestHandler } from "express";
 import { BizCardsError } from "../error/biz-cards-error";
+import { Logger } from "../logs/logger";
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  Logger.error(err);
   //userService Error
   if (err instanceof BizCardsError) {
     return res.status(err.status).json({ message: err.message });

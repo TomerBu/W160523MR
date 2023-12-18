@@ -7,6 +7,7 @@ import { isAdmin } from "../middleware/is-admin";
 import { isAdminOrUser } from "../middleware/is-admin-or-user";
 import { isUser } from "../middleware/is-user";
 import { auth } from "../service/auth-service";
+import { Logger } from "../logs/logger";
 
 const router = Router();
 
@@ -24,22 +25,15 @@ router.put("/:id", isUser, validateRegistration, async (req, res, next) => {
   //hash the password:
   req.body.password = await auth.hashPassword(req.body.password);
 
-  const savedUser = await User.findByIdAndUpdate({ _id: req.params.id }, req.body, {new: true});
+  const savedUser = await User.findByIdAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    { new: true }
+  );
   //not null check
   //remove the password
   res.json(savedUser);
 });
-
-
-
-
-
-
-
-
-
-
-
 
 router.get("/:id", isAdminOrUser, async (req, res, next) => {
   try {
@@ -49,6 +43,17 @@ router.get("/:id", isAdminOrUser, async (req, res, next) => {
 
     const { password, ...rest } = user;
     return res.json({ user: rest });
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.delete("/:id", isAdminOrUser, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deleteUser = await User.findOneAndDelete({ _id: id });
+    Logger.verbose("deleted the user");
+    return res.json(deleteUser);
   } catch (e) {
     next(e);
   }
