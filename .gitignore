@@ -2,6 +2,7 @@
 **/*.key
 
 **/node_modules/
-
+**/dgo
+**/dgo.*
 
 # git remove NodeJS/Lec2/node_modules

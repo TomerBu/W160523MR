@@ -7,6 +7,7 @@ import { errorHandler } from "./middleware/error-handler";
 import morgan from "morgan";
 import cors from "cors";
 import { cardsRouter } from "./routes/cards";
+import { Logger } from "./logs/logger";
 
 configDotEnv();
 connect();
@@ -28,4 +29,10 @@ app.use("/api/v1/cards", cardsRouter);
 app.use(errorHandler);
 app.use(notFound);
 
-app.listen(8080);
+
+const PORT = process.env.PORT ?? 8081;
+
+app.listen(process.env.PORT, ()=>{
+  // callback when the app is running:
+  Logger.info(`App is running: http://localhost:${PORT}`);
+});
