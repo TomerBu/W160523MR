@@ -76,12 +76,18 @@ router.post("/login", validateLogin, async (req, res, next) => {
   try {
     //check the request:
     const { email, password } = req.body as ILogin;
+    try {
+      //call the service:
+      const jwt = await validateUser(email, password);
+      //response
+      res.json(jwt);
+    } catch (e) {
+      //email / password are invalid
+      //save data to database: Date ['', '', '']
+      //res.json /or throw
+    }
 
-    //call the service:
-    const jwt = await validateUser(email, password);
-
-    //response
-    res.json(jwt);
+   
   } catch (e) {
     next(e);
   }

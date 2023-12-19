@@ -10,8 +10,6 @@ export type ICardInput = {
 };
 
 export type ICard = ICardInput & {
-  //JWT=> userid
-  //bizNumber => random Unique
   bizNumber?: number;
   userId?: string;
 

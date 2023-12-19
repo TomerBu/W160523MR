@@ -1,12 +1,12 @@
 import configDotEnv from "./config";
 import express, { json } from "express";
 import { notFound } from "./middleware/not-found";
-import { peopleRouter } from "./routes/people";
 import { usersRouter } from "./routes/users";
 import { connect } from "./database/connection";
 import { errorHandler } from "./middleware/error-handler";
 import morgan from "morgan";
 import cors from "cors";
+import { cardsRouter } from "./routes/cards";
 
 configDotEnv();
 connect();
@@ -24,7 +24,7 @@ app.use(express.static("public"));
 app.use(json());
 app.use(morgan("dev"));
 app.use("/api/v1/users", usersRouter); //next(err)
-app.use("/api/v1/people", peopleRouter);
+app.use("/api/v1/cards", cardsRouter);
 app.use(errorHandler);
 app.use(notFound);
 
